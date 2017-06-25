@@ -1,14 +1,4 @@
 #!/bin/bash
-mkdir -p /tmp/dwm/
-echo 0 > /tmp/dwm/var_shim
-print_var(){
-if [[ `cat /tmp/dwm/var_shim` == 1 ]]; then
-  echo ':' && echo 0 > /tmp/dwm/var_shim
-else
-  echo ' ' && echo 1 > /tmp/dwm/var_shim
-fi;
-}
-
 print_alarm(){
 var_time=`systemctl list-timers --user | grep alarm.timer | awk {'print $3'} | cut -c -5`
 if [[ -n $var_time ]]; then
@@ -121,7 +111,7 @@ done
 }
 
 print_date(){
-  echo -ne "\x03`date "+%H$(print_var)%M"`"
+  echo -ne "\x03`date "+%H:%M:%S"`"
 }
 
 print_trans(){
